@@ -22,15 +22,10 @@ function App() {
     setID(id);
   };
 
-  const onNewGoals = (newGoals) => {
-    console.log(newGoals);
-    // setGoals(newGoals)
-  }
-
   return (
     <div className="container">
       <div className="row justify-content-center">
-        <div className="col-8">
+        <div className="col-lg-8 col-md-12">
           <Main lastID={id} items={goals} onSaveGoal={saveGoalHandler} setGoals={setGoals}/>
         </div>
       </div>
