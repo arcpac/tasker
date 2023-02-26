@@ -1,23 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.css";
+import Main from "./components/Main";
+import { useState } from "react";
 
 function App() {
+  const dummy_goals = [
+    {
+      id: 1,
+      title: "Fun",
+    },
+  ];
+  const latestID = parseInt(dummy_goals[dummy_goals.length - 1].id) + 1;
+  const [goals, setGoals] = useState(dummy_goals);
+  let [id, setID] = useState(latestID);
+
+  const saveGoalHandler = (goal) => {
+    setGoals((existingGoals) => {
+      return [goal, ...existingGoals];
+    });
+    id = id + 1;
+    setID(id);
+  };
+
+  const onNewGoals = (newGoals) => {
+    console.log(newGoals);
+    // setGoals(newGoals)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-8">
+          <Main lastID={id} items={goals} onSaveGoal={saveGoalHandler} setGoals={setGoals}/>
+        </div>
+      </div>
     </div>
   );
 }
