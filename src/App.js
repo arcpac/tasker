@@ -4,6 +4,8 @@ import Main from "./components/Main";
 import Preloader from "./components/preloader/preloader";
 import { useState } from "react";
 
+import * as Icon from "react-feather";
+
 function App() {
   const dummy_goals = [
     {
@@ -57,6 +59,27 @@ function App() {
     <div className="container">
       <div className="row justify-content-center">
         <div className="col-lg-8 col-md-12">
+          <div className="row justify-content-end align-items-center pb-lg-3 border-bottom">
+            <div className="p-3 col-8 text-start">
+              <h4>
+                <Icon.Check /> Tasker
+              </h4>
+            </div>
+            <div className="p-3 col-2 text-center">
+              <p>
+                <Icon.UserPlus />
+              </p>
+              <p className="d-none d-sm-block d-sm-none d-md-block">
+                Send task
+              </p>
+            </div>
+            <div className="p-3 col-2 text-center">
+              <p>
+                <Icon.Settings />
+              </p>
+              <p className="d-none d-sm-block d-sm-none d-md-block">Settings</p>
+            </div>
+          </div>
           <Main
             lastID={id}
             items={goals}
@@ -70,7 +93,7 @@ function App() {
       </div>
       <footer class="fixed-bottom text-center text-lg-start bg-light text-muted">
         <div class="text-center p-lg-4 p-md-3 p-sm-1">
-          <p>© 2022 Copyright: antonraphaelcaballes@gmail.com</p> 
+          <p>© 2022 Copyright: antonraphaelcaballes@gmail.com</p>
         </div>
       </footer>
       <Preloader />
