@@ -12,21 +12,29 @@ function Main(props) {
     props.onSaveGoal(goalData);
   };
 
+//   const onFilterValueSelected = (filterValue) => {
+//     props.onFilterSelected(filterValue);
+//   };
+
+//   const onUpdateTask = (taskData) => {
+//     props.onUpdateTask(taskData);
+//   };
+
   return (
     <div className="p-lg-5 p-md-2">
       <div className="row justify-content-end align-items-center pb-lg-3 border-bottom">
-        <div class="p-3 col-8 text-start">
+        <div className="p-3 col-8 text-start">
           <h4>
-            <Icon.Check /> Task
+            <Icon.Check /> Tasker
           </h4>
         </div>
         <div className="p-3 col-2 text-center">
           <p>
-            <Icon.User />
+            <Icon.UserPlus />
           </p>
-          <p className="d-none d-sm-block d-sm-none d-md-block">Log In</p>
+          <p className="d-none d-sm-block d-sm-none d-md-block">Send task</p>
         </div>
-        <div class="p-3 col-2 text-center">
+        <div className="p-3 col-2 text-center">
           <p>
             <Icon.Settings />
           </p>
@@ -34,7 +42,12 @@ function Main(props) {
         </div>
       </div>
       <ItemForm onSaveGoal={saveGoalHandler} />
-      <List goals={props.items} setGoals={props.setGoals} />
+      <List
+        goals={props.items}
+        setGoals={props.setGoals}
+        // onFilterSelected={onFilterValueSelected}
+        // onUpdateTask={onUpdateTask}
+      />
     </div>
   );
 }

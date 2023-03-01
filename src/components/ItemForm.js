@@ -13,6 +13,7 @@ function ItemForm(props) {
 
   const submitHandler = (event) => {
     event.preventDefault();
+    console.log(enteredGoal)
 
     if (enteredGoal.trim().length === 0) {
       setIsValid(false);
@@ -21,8 +22,8 @@ function ItemForm(props) {
 
     const goalData = {
       title: enteredGoal,
+      status: "active"
     };
-    console.log(goalData);
     props.onSaveGoal(goalData);
     setGoal("");
   };
@@ -30,8 +31,8 @@ function ItemForm(props) {
   return (
     <form onSubmit={submitHandler} className="m-1 pt-3 pb-3">
       <div className="row justify-content-end">
-        <div class="col-8">
-          <div class="form-floating mb-3">
+        <div className="col-8">
+          <div className="form-floating mb-3">
             <input
               onChange={goalChangeHandler}
               value={enteredGoal}
@@ -39,12 +40,12 @@ function ItemForm(props) {
               type="text"
               className={`form-control ${!isValid ? 'is-invalid' : ''}`}
             ></input>
-            <label for="floatingInput">Enter task</label>
+            <label htmlFor="floatingInput">Enter task</label>
           </div>
         </div>
 
-        <div class="d-grid col-4">
-          <button type="submit" class="btn btn-dark">
+        <div className="d-grid col-4">
+          <button type="submit" className="btn btn-dark">
             List
           </button>
         </div>
