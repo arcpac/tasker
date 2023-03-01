@@ -1,6 +1,7 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import Main from "./components/Main";
+import Preloader from "./components/preloader/preloader";
 import { useState } from "react";
 
 function App() {
@@ -11,7 +12,6 @@ function App() {
       status: "active",
     },
   ];
-
 
   const latestID = parseInt(dummy_goals[dummy_goals.length - 1].id) + 1;
 
@@ -65,10 +65,15 @@ function App() {
 
             // onFilterSelected={onFilterValueSelected}
             // onUpdateTask={onUpdateTask}
-            
           />
         </div>
       </div>
+      <footer class="fixed-bottom text-center text-lg-start bg-light text-muted">
+        <div class="text-center p-lg-4 p-md-3 p-sm-1">
+          <p>© 2022 Copyright: antonraphaelcaballes@gmail.com</p> 
+        </div>
+      </footer>
+      <Preloader />
     </div>
   );
 }
