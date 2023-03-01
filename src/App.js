@@ -56,7 +56,7 @@ function App() {
   // };
 
   return (
-    <div className="container">
+    <div className="container-fluid">
       <div className="row justify-content-center">
         <div className="col-lg-8 col-md-12">
           <div className="row justify-content-end align-items-center pb-lg-3 border-bottom">
@@ -91,11 +91,15 @@ function App() {
           />
         </div>
       </div>
-      <footer class="fixed-bottom text-center text-lg-start bg-light text-muted">
-        <div class="text-center p-lg-4 p-md-3 p-sm-1">
-          <p>© 2022 Copyright: antonraphaelcaballes@gmail.com</p>
-        </div>
-      </footer>
+        <footer className="footer mt-auto text-center text-lg-start bg-light text-muted">
+          <div className="container-fluid">
+
+          </div>
+          <div class="text-center p-lg-4 p-md-3 p-sm-1">
+            <p>© 2022 Copyright: antonraphaelcaballes@gmail.com</p>
+          </div>
+        </footer>
+
       <Preloader />
     </div>
   );
