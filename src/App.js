@@ -5,8 +5,11 @@ import Preloader from "./components/preloader/preloader";
 import { useState } from "react";
 
 import * as Icon from "react-feather";
+import Modal from "./components/UI/Modal";
 
 function App() {
+  const [isModal, setModal] = useState();
+
   const dummy_goals = [
     {
       id: 1,
@@ -31,9 +34,27 @@ function App() {
     setID(id);
   };
 
+  const construction = () => {
+    setModal({
+      title: "Under construction!",
+      message: "🚧 🚧 🚧",
+    });
+  };
+
+  const onConfirmError = () => {
+    setModal(null);
+  };
+
   return (
     <div className="container-fluid">
       <div className="row justify-content-center">
+        {isModal && (
+          <Modal
+            title={isModal.title}
+            message={isModal.message}
+            onConfirmError={onConfirmError}
+          />
+        )}
         <div className="col-lg-8 col-md-8">
           <div className="row justify-content-end align-items-center pb-lg-3 border-bottom">
             <div className="p-3 col-8 text-start">
@@ -41,7 +62,7 @@ function App() {
                 <Icon.Check /> Tasker
               </h4>
             </div>
-            <div className="p-3 col-2 text-center">
+            <div className="p-3 col-2 text-center" onClick={construction}>
               <p>
                 <Icon.UserPlus />
               </p>
@@ -49,7 +70,7 @@ function App() {
                 Send task
               </p>
             </div>
-            <div className="p-3 col-2 text-center">
+            <div className="p-3 col-2 text-center" onClick={construction}>
               <p>
                 <Icon.Settings />
               </p>
@@ -66,7 +87,7 @@ function App() {
       </div>
       <footer className="footer mt-auto text-center text-lg-start bg-light text-muted">
         <div className="container-fluid"></div>
-        <div class="text-center p-lg-4 p-md-3 p-sm-1">
+        <div className="text-center p-lg-4 p-md-3 p-sm-1">
           <p>© 2022 Copyright: antonraphaelcaballes@gmail.com</p>
         </div>
       </footer>
