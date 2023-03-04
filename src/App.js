@@ -18,17 +18,6 @@ function App() {
   const latestID = parseInt(dummy_goals[dummy_goals.length - 1].id) + 1;
 
   let [goals, setGoals] = useState(dummy_goals);
-  // let [filterTextValue, setFilterValue] = useState("active");
-
-  // let filteredTasksList = goals.filter((task) => {
-  //   if (filterTextValue === "active") {
-  //     return task.status === "active";
-  //   } else if (filterTextValue === "inactive") {
-  //     return task.status === "inactive";
-  //   } else {
-  //     return task;
-  //   }
-  // });
 
   let [id, setID] = useState(latestID);
 
@@ -42,23 +31,10 @@ function App() {
     setID(id);
   };
 
-  // const onFilterValueSelected = (filterValue) => {
-  //   setFilterValue(filterValue);
-  // };
-
-  // const onUpdateTask = (taskData) => {
-  //   goals.map((goal) => {
-  //     if (goal.title === taskData.title) {
-  //       goal.status = "inactive";
-  //     }
-  //     return goal;
-  //   });
-  // };
-
   return (
     <div className="container-fluid">
       <div className="row justify-content-center">
-        <div className="col-lg-8 col-md-12">
+        <div className="col-lg-8 col-md-8">
           <div className="row justify-content-end align-items-center pb-lg-3 border-bottom">
             <div className="p-3 col-8 text-start">
               <h4>
@@ -85,21 +61,15 @@ function App() {
             items={goals}
             setGoals={setGoals}
             onSaveGoal={saveGoalHandler}
-
-            // onFilterSelected={onFilterValueSelected}
-            // onUpdateTask={onUpdateTask}
           />
         </div>
       </div>
-        <footer className="footer mt-auto text-center text-lg-start bg-light text-muted">
-          <div className="container-fluid">
-
-          </div>
-          <div class="text-center p-lg-4 p-md-3 p-sm-1">
-            <p>© 2022 Copyright: antonraphaelcaballes@gmail.com</p>
-          </div>
-        </footer>
-
+      <footer className="footer mt-auto text-center text-lg-start bg-light text-muted">
+        <div className="container-fluid"></div>
+        <div class="text-center p-lg-4 p-md-3 p-sm-1">
+          <p>© 2022 Copyright: antonraphaelcaballes@gmail.com</p>
+        </div>
+      </footer>
       <Preloader />
     </div>
   );
