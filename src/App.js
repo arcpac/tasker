@@ -1,11 +1,19 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import Main from "./components/Main";
+import NavBar from "./components/NavBar";
 import Preloader from "./components/preloader/preloader";
 import { useState } from "react";
+import { ReactSketchCanvas } from "react-sketch-canvas";
 
 import * as Icon from "react-feather";
 import Modal from "./components/UI/Modal";
+
+const styles = {
+  border: "0.0625rem solid #9c9c9c",
+  borderRadius: "0.25rem",
+  height: "500px",
+};
 
 function App() {
   const [isModal, setModal] = useState();
@@ -34,13 +42,6 @@ function App() {
     setID(id);
   };
 
-  const construction = () => {
-    setModal({
-      title: "Under construction!",
-      message: "🚧 🚧 🚧",
-    });
-  };
-
   const onConfirmError = () => {
     setModal(null);
   };
@@ -56,27 +57,17 @@ function App() {
           />
         )}
         <div className="col-lg-8 col-md-8">
-          <div className="row justify-content-end align-items-center pb-lg-3 border-bottom">
-            <div className="p-3 col-8 text-start">
-              <h4>
-                <Icon.Check /> Tasker
-              </h4>
-            </div>
-            <div className="p-3 col-2 text-center" onClick={construction}>
-              <p>
-                <Icon.UserPlus />
-              </p>
-              <p className="d-none d-sm-block d-sm-none d-md-block">
-                Send task
-              </p>
-            </div>
-            <div className="p-3 col-2 text-center" onClick={construction}>
-              <p>
-                <Icon.Settings />
-              </p>
-              <p className="d-none d-sm-block d-sm-none d-md-block">Settings</p>
-            </div>
-          </div>
+          <NavBar modal={onConfirmError}/>
+          {/* Sketch */}
+          <ReactSketchCanvas
+            style={styles}
+            width="500"
+            height="300"
+            strokeWidth={4}
+            strokeColor="red"
+          />
+
+          {/* end of sketch */}
           <Main
             lastID={id}
             items={goals}
