@@ -16,8 +16,6 @@ const styles = {
 };
 
 function App() {
-  const [isModal, setModal] = useState();
-
   const dummy_goals = [
     {
       id: 1,
@@ -25,12 +23,20 @@ function App() {
       status: "active",
     },
   ];
-
   const latestID = parseInt(dummy_goals[dummy_goals.length - 1].id) + 1;
+  const [isModal, setModal] = useState();
 
   let [goals, setGoals] = useState(dummy_goals);
-
   let [id, setID] = useState(latestID);
+
+  const useDrawToggle = (initialState) => {
+    const [toggleDraw, setToggleDraw] = useState(initialState);
+    const toggler = () => {
+      setToggleDraw(!toggleDraw);
+    };
+    return [toggleDraw, toggler];
+  };
+  const [toggleDraw, setToggleDraw] = useDrawToggle();
 
   const saveGoalHandler = (goal) => {
     setGoals((existingGoals) => {
@@ -46,6 +52,14 @@ function App() {
     setModal(null);
   };
 
+  const onConfirmContruction = () => {
+    console.log("MODAL");
+    setModal({
+      title: "Under construction!",
+      message: "🚧 🚧 🚧",
+    });
+  };
+
   return (
     <div className="container-fluid">
       <div className="row justify-content-center">
@@ -54,18 +68,24 @@ function App() {
             title={isModal.title}
             message={isModal.message}
             onConfirmError={onConfirmError}
+            setModal={setModal}
           />
         )}
         <div className="col-lg-8 col-md-8">
-          <NavBar modal={onConfirmError}/>
-          {/* Sketch */}
-          <ReactSketchCanvas
-            style={styles}
-            width="500"
-            height="300"
-            strokeWidth={4}
-            strokeColor="red"
+          <NavBar
+            onConfirmContruction={onConfirmContruction}
+            onConfirmDraw={setToggleDraw}
           />
+          {/* Sketch */}
+          {toggleDraw && (
+            <ReactSketchCanvas
+              style={styles}
+              width="500"
+              height="300"
+              strokeWidth={4}
+              strokeColor="red"
+            />
+          )}
 
           {/* end of sketch */}
           <Main
