@@ -1,15 +1,21 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import Main from "./components/Main";
+import NavBar from "./components/NavBar";
 import Preloader from "./components/preloader/preloader";
 import { useState } from "react";
+import { ReactSketchCanvas } from "react-sketch-canvas";
 
 import * as Icon from "react-feather";
 import Modal from "./components/UI/Modal";
 
-function App() {
-  const [isModal, setModal] = useState();
+const styles = {
+  border: "0.0625rem solid #9c9c9c",
+  borderRadius: "0.25rem",
+  height: "500px",
+};
 
+function App() {
   const dummy_goals = [
     {
       id: 1,
@@ -17,12 +23,20 @@ function App() {
       status: "active",
     },
   ];
-
   const latestID = parseInt(dummy_goals[dummy_goals.length - 1].id) + 1;
+  const [isModal, setModal] = useState();
 
   let [goals, setGoals] = useState(dummy_goals);
-
   let [id, setID] = useState(latestID);
+
+  const useDrawToggle = (initialState) => {
+    const [toggleDraw, setToggleDraw] = useState(initialState);
+    const toggler = () => {
+      setToggleDraw(!toggleDraw);
+    };
+    return [toggleDraw, toggler];
+  };
+  const [toggleDraw, setToggleDraw] = useDrawToggle();
 
   const saveGoalHandler = (goal) => {
     setGoals((existingGoals) => {
@@ -34,15 +48,16 @@ function App() {
     setID(id);
   };
 
-  const construction = () => {
+  const onConfirmError = () => {
+    setModal(null);
+  };
+
+  const onConfirmContruction = () => {
+    console.log("MODAL");
     setModal({
       title: "Under construction!",
       message: "🚧 🚧 🚧",
     });
-  };
-
-  const onConfirmError = () => {
-    setModal(null);
   };
 
   return (
@@ -53,30 +68,26 @@ function App() {
             title={isModal.title}
             message={isModal.message}
             onConfirmError={onConfirmError}
+            setModal={setModal}
           />
         )}
         <div className="col-lg-8 col-md-8">
-          <div className="row justify-content-end align-items-center pb-lg-3 border-bottom">
-            <div className="p-3 col-8 text-start">
-              <h4>
-                <Icon.Check /> Tasker
-              </h4>
-            </div>
-            <div className="p-3 col-2 text-center" onClick={construction}>
-              <p>
-                <Icon.UserPlus />
-              </p>
-              <p className="d-none d-sm-block d-sm-none d-md-block">
-                Send task
-              </p>
-            </div>
-            <div className="p-3 col-2 text-center" onClick={construction}>
-              <p>
-                <Icon.Settings />
-              </p>
-              <p className="d-none d-sm-block d-sm-none d-md-block">Settings</p>
-            </div>
-          </div>
+          <NavBar
+            onConfirmContruction={onConfirmContruction}
+            onConfirmDraw={setToggleDraw}
+          />
+          {/* Sketch */}
+          {toggleDraw && (
+            <ReactSketchCanvas
+              style={styles}
+              width="500"
+              height="300"
+              strokeWidth={4}
+              strokeColor="red"
+            />
+          )}
+
+          {/* end of sketch */}
           <Main
             lastID={id}
             items={goals}

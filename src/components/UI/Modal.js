@@ -6,11 +6,16 @@ function Modal(props) {
         className={`${classes.position} row justify-content-center error-modal`}
       >
         <div className="col-lg-4 col-md-6 col-sm-12">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">{props.title}</h5>
-              <p class="card-text">{props.message}</p>
-              <button class="btn btn-dark btn-sm" onClick={props.onConfirmError}>Ok</button>
+          <div className="card">
+            <div className="card-body">
+              <h5 className="card-title">{props.title}</h5>
+              <p className="card-text">{props.message}</p>
+              <button
+                className="btn btn-dark btn-sm"
+                onClick={props.onConfirmError}
+              >
+                Ok
+              </button>
             </div>
           </div>
         </div>
