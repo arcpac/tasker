@@ -10,7 +10,7 @@ function NavBar(props) {
 
   return (
     <div className="row justify-content-end align-items-center pb-lg-3 border-bottom">
-      <div className="p-3 col-8 text-start">
+      <div className="p-3 col-8 d-none d-xs-none d-sm-none d-md-none d-lg-block text-start">
         <h4>
           <Icon.Check /> Tasker
         </h4>
